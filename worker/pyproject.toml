@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lessionsummary-worker"
+version = "0.1.0"
+description = "Transcription (WhisperX + pyannote) and document extraction worker for LessionSummary"
+requires-python = ">=3.10"
+dependencies = [
+  "requests>=2.31",
+  "pymupdf>=1.24",
+  "python-docx>=1.1",
+  "python-pptx>=1.0",
+  "openpyxl>=3.1",
+  "odfpy>=1.4",
+]
+
+[project.optional-dependencies]
+# Separate extra so an extract-only box does not pull in torch (~3 GB).
+transcribe = ["whisperx>=3.3"]
+
+[project.scripts]
+lessionsummary-worker = "lessionsummary_worker.__main__:main"
+
+[tool.setuptools]
+packages = ["lessionsummary_worker"]

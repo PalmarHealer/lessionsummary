@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/*
+ * Colours are tokens, flipped by the OS theme. Components only use the
+ * semantic names (bg-surface, text-muted, …), never raw zinc shades, so the
+ * light theme needs no override list.
+ */
+:root {
+  --bg: #0c0f14;
+  --surface: #141922;
+  --surface-2: #1b2230;
+  --border: #262f3f;
+  --text: #e8ecf3;
+  --muted: #8b95a7;
+  --accent: #34d399;
+  --accent-strong: #10b981;
+  --accent-fg: #06251a;
+  --accent-soft: rgb(52 211 153 / 0.12);
+  --danger: #f87171;
+  --danger-soft: rgb(248 113 113 / 0.12);
+  --warn: #fbbf24;
+  --warn-soft: rgb(251 191 36 / 0.12);
+  --info: #60a5fa;
+  --info-soft: rgb(96 165 250 / 0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #eef1f5;
+    --border: #dde2ea;
+    --text: #151a23;
+    --muted: #5d6778;
+    --accent: #059669;
+    --accent-strong: #047857;
+    --accent-fg: #ffffff;
+    --accent-soft: rgb(5 150 105 / 0.1);
+    --danger: #dc2626;
+    --danger-soft: rgb(220 38 38 / 0.08);
+    --warn: #b45309;
+    --warn-soft: rgb(217 119 6 / 0.12);
+    --info: #2563eb;
+    --info-soft: rgb(37 99 235 / 0.08);
+  }
+}
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+}
+
+html, body { min-height: 100%; background: var(--bg); color: var(--text); }
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-text transition-colors hover:bg-surface-2 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-accent-fg transition-colors hover:bg-accent-strong disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium text-danger transition-colors hover:bg-danger-soft;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-text;
+  }
+  .input {
+    @apply w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-muted focus:border-accent focus:outline-none;
+  }
+  .card {
+    @apply rounded-xl border border-border bg-surface;
+  }
+  .label {
+    @apply mb-1 block text-xs font-medium uppercase tracking-wide text-muted;
+  }
+}
+
+/* Rendered Markdown (summaries). */
+.prose-summary { line-height: 1.65; overflow-wrap: anywhere; }
+.prose-summary h1 { font-size: 1.4rem; font-weight: 700; margin: 1.4em 0 .5em; }
+.prose-summary h2 { font-size: 1.15rem; font-weight: 700; margin: 1.4em 0 .4em; }
+.prose-summary h3 { font-size: 1rem; font-weight: 600; margin: 1.2em 0 .3em; }
+.prose-summary > :first-child { margin-top: 0; }
+.prose-summary p { margin: .6em 0; }
+.prose-summary ul, .prose-summary ol { margin: .5em 0; padding-left: 1.4em; }
+.prose-summary ul { list-style: disc; }
+.prose-summary ol { list-style: decimal; }
+.prose-summary li { margin: .2em 0; }
+.prose-summary a { color: var(--accent); text-decoration: underline; }
+.prose-summary code { background: var(--surface-2); padding: .1em .35em; border-radius: .3em; font-size: .9em; }
+.prose-summary pre { background: var(--surface-2); padding: .8em 1em; border-radius: .5em; overflow-x: auto; }
+.prose-summary pre code { background: none; padding: 0; }
+.prose-summary blockquote { border-left: 3px solid var(--border); padding-left: 1em; color: var(--muted); }
+.prose-summary table { border-collapse: collapse; margin: .8em 0; display: block; overflow-x: auto; }
+.prose-summary th, .prose-summary td { border: 1px solid var(--border); padding: .35em .6em; text-align: left; }
+.prose-summary th { background: var(--surface-2); }
+.prose-summary hr { border-color: var(--border); margin: 1.5em 0; }

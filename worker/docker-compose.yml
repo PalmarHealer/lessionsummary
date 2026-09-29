@@ -1,0 +1,20 @@
+services:
+  worker:
+    build: .
+    image: lessionsummary-worker:local
+    restart: unless-stopped
+    env_file: .env
+    # Remove the reservation (and set WHISPER_DEVICE=cpu) for a CPU-only box.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      # Model weights (~3 GB for large-v3 + pyannote + wav2vec2) survive rebuilds.
+      - hf-cache:/cache
+
+volumes:
+  hf-cache:

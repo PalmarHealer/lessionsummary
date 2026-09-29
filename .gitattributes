@@ -1,0 +1,6 @@
+# Shell scripts must keep LF even when checked out on Windows: a CRLF shebang
+# makes the kernel look for an interpreter named "/bin/sh\r".
+*.sh text eol=lf
+
+# Same reasoning for files that only ever run inside Linux containers.
+Dockerfile text eol=lf

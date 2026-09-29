@@ -1,0 +1,20 @@
+services:
+  lessionsummary:
+    build: ./web
+    container_name: lessionsummary
+    restart: unless-stopped
+    environment:
+      ORIGIN: ${ORIGIN:?set the public URL, e.g. https://summary.example.com}
+      OPENSAX_URL: ${OPENSAX_URL:?set the OpenSax URL, e.g. https://opensax.example.com}
+      OPENSAX_CLIENT_ID: ${OPENSAX_CLIENT_ID:-lessionsummary}
+      OPENSAX_CLIENT_SECRET: ${OPENSAX_CLIENT_SECRET:?must match OPENSAX_OAUTH_CLIENTS on OpenSax}
+      LS_WORKER_TOKEN: ${LS_WORKER_TOKEN:?set a long random secret for the Whisper worker}
+      LS_ADMIN_TOKEN: ${LS_ADMIN_TOKEN:-}
+      LS_MAX_UPLOAD_MB: ${LS_MAX_UPLOAD_MB:-2048}
+    ports:
+      - "${BIND_HOST:-127.0.0.1}:3002:3000"
+    volumes:
+      - lessionsummary-data:/app/data
+
+volumes:
+  lessionsummary-data:

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "lessionsummary": {
+      "type": "http",
+      "url": "${LS_URL}/mcp",
+      "headers": { "Authorization": "Bearer ${LS_API_TOKEN}" }
+    }
+  }
+}
