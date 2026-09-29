@@ -1,5 +1,8 @@
 services:
   lessionsummary:
+    # Built by CI on every push to main; pin LS_TAG to sha-<commit> to roll back.
+    # `docker compose up --build` builds from source instead.
+    image: ghcr.io/palmarhealer/lessionsummary-web:${LS_TAG:-latest}
     build: ./web
     container_name: lessionsummary
     restart: unless-stopped

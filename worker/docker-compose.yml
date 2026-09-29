@@ -1,7 +1,8 @@
 services:
   worker:
+    # Built by CI on pushes to main that touch worker/; `up --build` builds locally.
+    image: ghcr.io/palmarhealer/lessionsummary-worker:${LS_TAG:-latest}
     build: .
-    image: lessionsummary-worker:local
     restart: unless-stopped
     env_file: .env
     # Remove the reservation (and set WHISPER_DEVICE=cpu) for a CPU-only box.
