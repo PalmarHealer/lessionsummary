@@ -141,3 +141,8 @@ Regel eigene Vorgaben. Wer die Instanz für andere betreibt, ist
 datenschutzrechtlich Verantwortlicher (Impressum, Datenschutzerklärung, AV-Vertrag
 mit dem Hoster). Die Transkription läuft auf eigener Hardware; Claude bekommt
 über MCP Transkripte, Dokumenttexte und Bilder zu sehen.
+
+## Lizenz
+
+AGPL-3.0 – siehe [`LICENSE`](LICENSE). Wer eine veränderte Version als Dienst
+für andere betreibt, muss deren Quellcode den Nutzern zugänglich machen.
