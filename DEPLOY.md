@@ -16,10 +16,8 @@ Die Images baut die CI bei jedem Push auf `main` und legt sie auf GHCR ab:
 - `ghcr.io/palmarhealer/lessionsummary-web` (bei Änderungen unter `web/`)
 - `ghcr.io/palmarhealer/lessionsummary-worker` (bei Änderungen unter `worker/`)
 
-Tags: `latest` und `sha-<commit>`. `LS_TAG` pinnt eine Version. Das Repo ist
-privat, also auch die Pakete: Jeder Host braucht einmal
-`docker login ghcr.io` mit einem PAT (Scope `read:packages`), in Portainer
-unter *Registries* als GHCR-Registry.
+Tags: `latest` und `sha-<commit>`. `LS_TAG` pinnt eine Version. Die Pakete
+sind öffentlich, ein `docker login` ist nicht nötig.
 
 ## 0. Secrets erzeugen
 
@@ -46,8 +44,7 @@ listet `userinfo_endpoint`.
 1. DNS: `summary.example.com` auf den Server.
 2. Portainer → *Stacks* → *Add stack* → *Repository*:
    Repo `https://github.com/PalmarHealer/lessionsummary`, Compose-Pfad
-   `docker-compose.yml`, Authentifizierung mit einem PAT (Repo privat).
-   Oder den Inhalt von `docker-compose.yml` in den Web-Editor kopieren.
+   `docker-compose.yml`. Oder den Inhalt von `docker-compose.yml` in den Web-Editor kopieren.
 3. Env-Variablen:
 
    ```env
@@ -126,7 +123,6 @@ docker run --rm --gpus all nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi   # GP
 ### Worker starten
 
 ```bash
-docker login ghcr.io                   # PAT mit read:packages
 mkdir -p ~/lessionsummary-worker && cd ~/lessionsummary-worker
 # docker-compose.yml aus worker/ hierher kopieren, dann .env anlegen:
 cat > .env <<'ENV'
